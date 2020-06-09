@@ -1,1 +1,2 @@
-# circular_societies
+# Circular Societies Visualization Tool
+
