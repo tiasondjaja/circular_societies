@@ -1,11 +1,11 @@
 # Circular Societies Visualization Tool
-Kristen Mazur, Mutiara Sondjaja, Matthew Wright, and Carolyn Yarnall
+*Kristen Mazur, Mutiara Sondjaja, Matthew Wright, and Carolyn Yarnall*
 
 This github repostory contains a set of python tools for visualizing and generating examples of "circular societies" in approval voting.
 
-   Try online: examples-Google_Colab.ipynb [Link to Google Colab notebook](https://drive.google.com/file/d/1K2BIE4yZJZWwpXcJERYEuEgioiuWvZ9e/view?usp=sharing)
+**Try online** <a href=\"https://colab.research.google.com/github/tiasondjaja/circular_societies/blob/master/examples-Google_Colab.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>
 
-Contents
+**Contents**
 + Background
 + The `circularsocieties` module
   + Documentation
