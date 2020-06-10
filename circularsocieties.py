@@ -2,10 +2,7 @@ import numpy as np
 import scipy as sp
 import cvxpy as cp
 import matplotlib.pyplot as plt
-import datetime
-import copy
 import itertools
-
 
 # Part 0 ----------------------------------
 # Define the Set class (approval set)
@@ -180,7 +177,7 @@ class CircularSociety:
         subcollections_k = [list(i) for i in itertools.combinations(collection, k)]
         for collection1 in subcollections_k:
           setname = collection1[0]
-          A = S.getSet(setname)
+          A = self.getSet(setname)
           left = A.left_endpt
           left_list = np.array([self.getSet(setname1).isPointInSet(left) for setname1 in collection1 ])
           left_good = np.prod(left_list)
@@ -239,10 +236,10 @@ class CircularSociety:
       
       ## Solve ILP using cvxpy
       x = cp.Variable(M, integer = True)
-      objective = cp.Minimize( c*x)
-      constraints = [ Mat*x >= np.ones(N), 0 <= x, x <= 1]
+      objective = cp.Minimize( cp.matmul(c, x) )
+      constraints = [ cp.matmul(Mat,x) >= np.ones(N), 0 <= x, x <= 1]
       prob = cp.Problem( objective, constraints )
-      val = prob.solve()
+      val = prob.solve(solver='GLPK_MI')
       piercingNumber = int(np.round(val))
       piercingSet = np.transpose(orderedendpts)[ np.round(x.value) > 0]
       
@@ -271,8 +268,8 @@ class CircularSociety:
       piercingSet = []
       while( len(uncovered_setnames) > 0): #while there are uncovered sets
         current_point = self.getSet(uncovered_setnames[0]).right_endpt
-        covered_setnames = [setname for setname in uncovered_setnames if S.getSet(setname).isPointInSet(current_point) ]
-        uncovered_setnames = [setname for setname in uncovered_setnames if not S.getSet(setname).isPointInSet(current_point) ]
+        covered_setnames = [setname for setname in uncovered_setnames if self.getSet(setname).isPointInSet(current_point) ]
+        uncovered_setnames = [setname for setname in uncovered_setnames if not self.getSet(setname).isPointInSet(current_point) ]
         piercingSet.append( [current_point, covered_setnames] )
       return piercingSet
 
@@ -498,14 +495,14 @@ def generateRandomFixedLengthSociety( societyname, N, modulo, p, tick = 0.5 ):
     #    The length of each set is p times modulo
     # tick = 0.5 : controls tick marks in the visualization
     
-    S = CircularSociety( societyname, modulo, tick = tick )
+    CS = CircularSociety( societyname, modulo, tick = tick )
     
     for i in list(range(N)):
       left = np.random.uniform(low=0, high=modulo)
       right = (left + p * modulo) % modulo
-      S.addApprovalSet( "Set " + str(i+1), left , right )
+      CS.addApprovalSet( "Set " + str(i+1), left , right )
     
-    return S
+    return CS
 
 # extras:
 # Define function to generate a circular society with a random approval sets
@@ -517,7 +514,7 @@ def generateRandomSociety( societyname, N, modulo, epsilon = 0.5, mode = 1, a = 
     #   mode = 2: left endpoint is chosen uniformly at random from [0, modulo]; 
     #             set length is from the beta distribution with parameters a, b
     
-    S = CircularSociety( societyname, modulo, tick = epsilon )
+    CS = CircularSociety( societyname, modulo, tick = epsilon )
     
     for i in list(range(N)):
       if mode == 1:
@@ -527,18 +524,18 @@ def generateRandomSociety( societyname, N, modulo, epsilon = 0.5, mode = 1, a = 
         left = np.random.uniform(low=0, high=modulo) 
         right = (left + np.random.beta(a, b)* modulo) % modulo
         
-      S.addApprovalSet( "Set " + str(i+1), left , right )
+      CS.addApprovalSet( "Set " + str(i+1), left , right )
     
     
-    return S
+    return CS
   
 # Define function to generate U(N, h) (Hardin's uniform circular society)
 def generateUniformCircularSociety( societyname, N, h, epsilon = 0.5 ):
     # epsilon = 0.5 is the perturbation of the right-endpoints
     
-    S = CircularSociety( societyname, N, tick = epsilon )
+    CS = CircularSociety( societyname, N, tick = epsilon )
     
     for i in list(range(N)):
-        S.addApprovalSet( "Set " + str(i+1), i, round( (i + h - epsilon) % N, 1) )
-    return S
+        CS.addApprovalSet( "Set " + str(i+1), i, round( (i + h - epsilon) % N, 1) )
+    return CS
 
