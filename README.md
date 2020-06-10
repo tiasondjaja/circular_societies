@@ -3,7 +3,7 @@
 
 This github repostory contains a set of python tools for visualizing and generating examples of "circular societies" in approval voting.
 
-**Try online** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tiasondjaja/circular_societies/blob/master/examples-Google_Colab.ipynb)
+**Try online:** [examples-Google_Colab.ipynb ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tiasondjaja/circular_societies/blob/master/examples-Google_Colab.ipynb)
 
 **Contents**
 + Background
