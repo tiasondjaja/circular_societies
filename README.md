@@ -21,7 +21,7 @@ The development of this tool is motivated by the following papers, which study [
 ## The `circularsocieties` module
 + circularsocieties.py
 + Examples (local Jupyter notebook): examples.ipynb
-+ Examples (online): examples-Google_Colab.ipynb [Link to Google Colab notebook](https://drive.google.com/file/d/1K2BIE4yZJZWwpXcJERYEuEgioiuWvZ9e/view?usp=sharing)
++ Examples (online): [examples-Google_Colab.ipynb ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tiasondjaja/circular_societies/blob/master/examples-Google_Colab.ipynb)
 
 ### Documentation
 + [DOCUMENTATION.md](https://github.com/tiasondjaja/circular_societies/blob/master/DOCUMENTATION.md)
