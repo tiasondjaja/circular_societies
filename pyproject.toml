@@ -1,0 +1,19 @@
+[project]
+name = "approval_voting"
+version = "0.0.1"
+authors = [
+  { name="Tia Sondjaja", email="msondjaja@gmail.com" },
+]
+description = "Approval Voting"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/tiasondjaja/circular_societies"
+Issues = "https://github.com/tiasondjaja/circular_societies/issues"
