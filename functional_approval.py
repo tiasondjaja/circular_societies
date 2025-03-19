@@ -168,7 +168,8 @@ class Society:
             plot_approval_sets = True ,
             plot_count_function = True,
             plot_binary_count = True,
-            plot_sum_count = True,
+            plot_combination_count = True,
+            c = 0.5, 
             fig_path=None,
             xmin=None, xmax=None, ymin=None, ymax=None,
             tick=1/3, prec=None      
@@ -186,7 +187,7 @@ class Society:
             self.prec = prec
 
         ## Plot Setup
-        nrows = int(plot_approval_sets)+int(plot_count_function) + int(plot_binary_count) + int(plot_sum_count)
+        nrows = int(plot_approval_sets)+int(plot_count_function) + int(plot_binary_count) + int(plot_combination_count)
         fig, axs = plt.subplots(nrows = nrows, ncols = 1, sharex=True)
         plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.75)
 
@@ -210,12 +211,12 @@ class Society:
             r += 1
 
         if plot_binary_count:
-            self.plot_summary_function( axs[r], self.X, self.binary_count_function, label='Binary Count', tick=tick)
+            self.plot_summary_function( axs[r], self.X, self.binary_count_function, label='Binary Count Function', tick=tick)
             r += 1
-        if plot_sum_count:
+        if plot_combination_count:
             self.plot_summary_function( 
-                axs[r], self.X, self.count_function+self.binary_count_function, 
-                    label='Sum of Count and Binary Count Functions', tick=tick
+                axs[r], self.X, c * self.count_function+ (1-c) * self.binary_count_function, 
+                    label=f'{c}*Count+{1-c}*Binary Count', tick=tick
             )
 
         if fig_path:
